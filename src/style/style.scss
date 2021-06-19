@@ -1,8 +1,14 @@
-$game-field_width: 400px;
+$game-field_width_L: 400px;
+$game-field_width_M: 400px;
+$game-field_width_S: 400px;
+$game-field_backround: #fa88cb;
+$cell-background: cadetblue;
+$border-color: #312b2b;
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -14,10 +20,12 @@ body {
 }
 
 .game-field {
+  padding: 2px;
   display: grid;
-  width: $game-field_width;
-  height: $game-field_width;
-  border: 2px solid #4c00ff;
+  width: $game-field_width_L;
+  height: $game-field_width_L;
+  background-color: $game-field_backround;
+  border: 1px solid $border-color;
 }
 
 .game-field_size_9 {
@@ -51,19 +59,23 @@ body {
 }
 
 .game-field__cell {
+  margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  background-color: $cell-background;
+  border: 1px solid $border-color;
+  border-radius: 8px;
 }
 
 .game-field__cell_number_0 {
-  color: rgba(255, 0, 0, 0);
-  background-color: #e57fff;
+  color: #ff000000;
+  background: none;
+  border: none;
 }
 
 .control-panel, .info-panel {
-  width: $game-field_width;
+  width: $game-field_width_L;
   height: 30px;
   border: 1px solid black;
 }
