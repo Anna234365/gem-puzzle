@@ -5,9 +5,7 @@ import Cells from './Cells';
 import renderInfoPanel from './infoPanel';
 import renderControlPanel from './controlPanel';
 
-
 const size = 36;
-
 renderInfoPanel();
 renderGameField(size);
 
