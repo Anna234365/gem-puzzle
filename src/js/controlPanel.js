@@ -1,5 +1,5 @@
-export default function controlPanel() {
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('control-panel');
-  document.body.appendChild(wrapper);
+export default function renderControlPanel() {
+  const controlPanel = document.createElement('div');
+  controlPanel.classList.add('control-panel');
+  document.body.appendChild(controlPanel);
 }

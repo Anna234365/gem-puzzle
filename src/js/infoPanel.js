@@ -1,5 +1,5 @@
-export default function infoPanel() {
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('info-panel');
-  document.body.appendChild(wrapper);
+export default function renderInfoPanel() {
+  const infoPanel = document.createElement('div');
+  infoPanel.classList.add('info-panel');
+  document.body.appendChild(infoPanel);
 }

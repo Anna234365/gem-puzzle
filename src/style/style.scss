@@ -1,4 +1,4 @@
-$game-area_width: 400px;
+$game-field_width: 400px;
 
 * {
   margin: 0;
@@ -13,56 +13,57 @@ body {
   height: 100vh;
 }
 
-.game-area {
+.game-field {
   display: grid;
-  width: $game-area_width;
-  height: $game-area_width;
+  width: $game-field_width;
+  height: $game-field_width;
   border: 2px solid #4c00ff;
 }
 
-.game-area_size_9 {
+.game-field_size_9 {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
 
-.game-area_size_16 {
+.game-field_size_16 {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
-.game-area_size_25 {
+.game-field_size_25 {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
 }
 
-.game-area_size_36 {
+.game-field_size_36 {
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
 }
 
-.game-area_size_49 {
+.game-field_size_49 {
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(7, 1fr);
 }
 
-.game-area_size_64 {
+.game-field_size_64 {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
 }
 
-.game-area__cell {
+.game-field__cell {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
 }
 
-.game-area__cell_number_0 {
+.game-field__cell_number_0 {
   color: rgba(255, 0, 0, 0);
+  background-color: #e57fff;
 }
 
 .control-panel, .info-panel {
-  width: $game-area_width;
+  width: $game-field_width;
   height: 30px;
   border: 1px solid black;
 }
