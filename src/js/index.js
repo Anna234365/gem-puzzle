@@ -1,9 +1,10 @@
 import '../style/style.scss';
+import 'bootstrap/js/dist/dropdown';
 import AppState from './appState';
 import renderGameField from '../blocks/game-field/gameField';
 import Cells from '../blocks/cells/Cells';
 import InfoPanel from '../blocks/info-panel/InfoPanel';
-import renderControlPanel from '../blocks/control-panel/controlPanel';
+import ControlPanel from '../blocks/control-panel/ControlPanel';
 
 
 const size = 9;
@@ -23,4 +24,5 @@ let cells = new Cells(appState, infoPanel);
 cells.render();
 cells.addListener();
 
-renderControlPanel();
+let controlPanel = new ControlPanel();
+controlPanel.renderCotrolPanel();
