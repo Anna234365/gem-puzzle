@@ -1,12 +1,26 @@
-export default function renderInfoPanel() {
-  document.body.insertAdjacentHTML(
-    'afterbegin',
-    `<div class="info-panel">
-      <div class="info-panel__moves-wrapper">Moves:
-        <div class="info-panel__moves">0</div>
-      </div>
-      <div class="info-panel__timer-wrapper">Time:
-      <div class="info-panel__time">00:00:00</div>
-    </div>
-    </div>`);
+export default class InfoPanel {
+  constructor(appState) {
+    this.appState = appState;
+    this.movesCounter;
+    this.timer;
+  }
+
+  renderInfoPanel() {
+    document.body.insertAdjacentHTML(
+      'afterbegin',
+      `<div class="info-panel">
+        <div class="info-panel__moves-wrapper">Moves:
+          <div class="info-panel__moves">${this.appState.moves}</div>
+        </div>
+        <div class="info-panel__timer-wrapper">Time:
+          <div class="info-panel__time">${this.appState.time}</div>
+        </div>
+      </div>`);
+      this.movesCounter = document.querySelector('.info-panel__moves');
+      this.timer = document.querySelector('.info-panel__time');
+  }
+
+  renderMovesCounter() {
+    this.movesCounter.innerHTML = this.appState.moves;
+  }
 }

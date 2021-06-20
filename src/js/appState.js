@@ -7,6 +7,7 @@ export default class AppState {
     this.currentOrder = [];
     this.correctOrder = [];
     this.moves = 0;
+    this.time = 0;
   }
 
   calculateOrders() {
@@ -34,6 +35,10 @@ export default class AppState {
 
   checkCurrentOrder() {
     this.currentOrder.toString() == this.correctOrder.toString() ? this.announceEndGame() : false;
+  }
+
+  updateMovesCounter() {
+    this.moves++;
   }
 
   announceEndGame() {

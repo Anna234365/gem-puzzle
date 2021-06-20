@@ -1,6 +1,7 @@
 export default class Cells {
-  constructor(appState) {
+  constructor(appState, infoPanel) {
     this.appState = appState;
+    this.infoPanel = infoPanel;
     this.size = this.appState.currentOrder.length;
     this.currentOrder = this.appState.currentOrder;
     this.rowLength = Math.sqrt(this.size);
@@ -83,6 +84,8 @@ export default class Cells {
         this.currentOrder[clickedCellNumber - 1] = 0;
         this.render();
         this.appState.updateCurrentOrder(this.currentOrder);
+        this.appState.updateMovesCounter();
+        this.infoPanel.renderMovesCounter();
       }
     })
   }
