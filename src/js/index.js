@@ -5,14 +5,18 @@ import Cells from './Cells';
 import renderInfoPanel from './infoPanel';
 import renderControlPanel from './controlPanel';
 
-const size = 36;
+const size = 9;
 renderInfoPanel();
 renderGameField(size);
 
 let appState = new Appstate(size);
-const currentOrder = appState.calculateInitOrder();
+appState.calculateOrders();
 
-let cells = new Cells(currentOrder);
+let cells = new Cells(appState);
 cells.render();
 cells.addListener();
-renderControlPanel()
+renderControlPanel();
+
+function myFunc() {
+  alert('done')
+}

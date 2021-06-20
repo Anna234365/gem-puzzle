@@ -1,8 +1,9 @@
 export default class Cells {
-  constructor(currentOrder) {
-    this.size = currentOrder.length;
+  constructor(appState) {
+    this.appState = appState;
+    this.size = this.appState.currentOrder.length;
+    this.currentOrder = this.appState.currentOrder;
     this.rowLength = Math.sqrt(this.size);
-    this.currentOrder = currentOrder;
     this.gameField = document.querySelector('.game-field');
   }
 
@@ -81,6 +82,7 @@ export default class Cells {
         this.currentOrder[emptyCellNumber - 1] = this.currentOrder[clickedCellNumber - 1];
         this.currentOrder[clickedCellNumber - 1] = 0;
         this.render();
+        this.appState.updateCurrentOrder(this.currentOrder);
       }
     })
   }

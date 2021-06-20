@@ -5,16 +5,38 @@ export default class AppState {
     this.size = size;
     this.initOrder = [];
     this.currentOrder = [];
+    this.correctOrder = [];
     this.moves = 0;
   }
 
-  calculateInitOrder() {
-    let array = [];
-    for (let i = 0; i < this.size; i++) {
-      array.push(i);
-    }
-    this.initOrder = _shuffle(array);
+  calculateOrders() {
+    this.calculateCorrectOrder();
+    this.calculateInitOrder();
     this.currentOrder = this.initOrder;
-    return this.initOrder;
+  }
+
+  calculateCorrectOrder() {
+    for (let i = 1; i < this.size; i++) {
+      this.correctOrder.push(i);
+    }
+    this.correctOrder.push(0);
+  }
+
+  calculateInitOrder() {
+    this.initOrder = _shuffle(this.correctOrder);
+  }
+
+  updateCurrentOrder(currentOrder) {
+    this.currentOrder = currentOrder;
+    this.checkCurrentOrder();
+  }
+
+  checkCurrentOrder() {
+    this.currentOrder.toString() == this.correctOrder.toString() ? this.announceEndGame() : false;
+  }
+
+  announceEndGame() {
+    document.body.style.backgroundColor = 'black';
+    setTimeout(() => alert('win'), 1000);
   }
 }

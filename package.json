@@ -10,6 +10,7 @@
   "author": "Anna234365",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.1",
     "mini-css-extract-plugin": "^1.6.0",
