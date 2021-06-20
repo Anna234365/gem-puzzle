@@ -3,6 +3,7 @@ export default class InfoPanel {
     this.appState = appState;
     this.movesCounter;
     this.timer;
+
   }
 
   renderInfoPanel() {
@@ -13,7 +14,7 @@ export default class InfoPanel {
           <div class="info-panel__moves">${this.appState.moves}</div>
         </div>
         <div class="info-panel__timer-wrapper">Time:
-          <div class="info-panel__time">${this.appState.time}</div>
+          <div class="info-panel__time">${this.appState.timerString}</div>
         </div>
       </div>`);
       this.movesCounter = document.querySelector('.info-panel__moves');
@@ -22,5 +23,9 @@ export default class InfoPanel {
 
   renderMovesCounter() {
     this.movesCounter.innerHTML = this.appState.moves;
+  }
+
+  renderTimer() {
+    setInterval(() => this.timer.innerHTML = this.appState.timerString, 1000);
   }
 }

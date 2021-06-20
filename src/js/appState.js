@@ -1,4 +1,5 @@
-var _shuffle = require('lodash/shuffle');
+const _shuffle = require('lodash/shuffle');
+const moment = require('moment');
 
 export default class AppState {
   constructor(size) {
@@ -7,7 +8,8 @@ export default class AppState {
     this.currentOrder = [];
     this.correctOrder = [];
     this.moves = 0;
-    this.time = 0;
+    this.time = new Date(2021, 0, 0, 0, 0, 0, 0);
+    this.timerString = '00:00:00';
   }
 
   calculateOrders() {
@@ -26,6 +28,17 @@ export default class AppState {
   calculateInitOrder() {
     this.initOrder = _shuffle(this.correctOrder);
     this.initOrder.toString() == this.correctOrder.toString() ? this.calculateInitOrder() : false;
+  }
+
+  startTimer() {
+    setInterval(() => {
+      this.time.setSeconds(this.time.getSeconds() + 1);
+      if(this.time.getHours() > 0) {
+        this.timerString = moment(this.time).format('hh:mm:ss');
+      } else {
+        this.timerString = moment(this.time).format('00:mm:ss');
+      }
+    }, 1000)
   }
 
   updateCurrentOrder(currentOrder) {
