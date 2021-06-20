@@ -1,22 +1,19 @@
 import '../style/style.scss';
 import Appstate from './appState';
-import renderGameField from './gameField';
-import Cells from './Cells';
-import renderInfoPanel from './infoPanel';
-import renderControlPanel from './controlPanel';
+import renderGameField from '../blocks/game-field/gameField';
+import Cells from '../blocks/cells/Cells';
+import renderInfoPanel from '../blocks/info-panel/infoPanel';
+import renderControlPanel from '../blocks/control-panel/controlPanel';
 
 const size = 9;
-renderInfoPanel();
-renderGameField(size);
 
 let appState = new Appstate(size);
 appState.calculateOrders();
 
+renderInfoPanel();
+renderGameField(size);
+renderControlPanel();
+
 let cells = new Cells(appState);
 cells.render();
 cells.addListener();
-renderControlPanel();
-
-function myFunc() {
-  alert('done')
-}

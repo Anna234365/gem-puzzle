@@ -1,0 +1,15 @@
+.game-field__cell {
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $cell-background;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+}
+
+.game-field__cell_number_0 {
+  color: #ff000000;
+  background: none;
+  border: none;
+}

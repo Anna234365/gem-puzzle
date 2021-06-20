@@ -1,9 +1,8 @@
-$game-field_width_L: 400px;
-$game-field_width_M: 400px;
-$game-field_width_S: 400px;
-$game-field_backround: #fa88cb;
-$cell-background: cadetblue;
-$border-color: #312b2b;
+@import './consts.scss';
+@import '../blocks/game-field/game-field.scss';
+@import '../blocks/cells/cells.scss';
+@import '../blocks/info-panel/info-panel.scss';
+@import '../blocks/control-panel/control-panel.scss';
 
 * {
   margin: 0;
@@ -17,65 +16,4 @@ body {
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-}
-
-.game-field {
-  padding: 2px;
-  display: grid;
-  width: $game-field_width_L;
-  height: $game-field_width_L;
-  background-color: $game-field_backround;
-  border: 1px solid $border-color;
-}
-
-.game-field_size_9 {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-}
-
-.game-field_size_16 {
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-}
-
-.game-field_size_25 {
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-}
-
-.game-field_size_36 {
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-}
-
-.game-field_size_49 {
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(7, 1fr);
-}
-
-.game-field_size_64 {
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-}
-
-.game-field__cell {
-  margin: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $cell-background;
-  border: 1px solid $border-color;
-  border-radius: 8px;
-}
-
-.game-field__cell_number_0 {
-  color: #ff000000;
-  background: none;
-  border: none;
-}
-
-.control-panel, .info-panel {
-  width: $game-field_width_L;
-  height: 30px;
-  border: 1px solid black;
 }
