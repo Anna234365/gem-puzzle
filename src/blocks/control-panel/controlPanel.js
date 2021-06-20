@@ -1,5 +1,3 @@
 export default function renderControlPanel() {
-  const controlPanel = document.createElement('div');
-  controlPanel.classList.add('control-panel');
-  document.body.appendChild(controlPanel);
+  document.body.insertAdjacentHTML('beforeend', '<div class="control-panel"></div>');
 }

@@ -1,5 +1,14 @@
 .info-panel {
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
   width: $game-field_width_L;
-  height: 30px;
-  border: 1px solid black;
+}
+
+.info-panel__timer-wrapper, .info-panel__moves-wrapper {
+  display: flex;
+}
+
+.info-panel__time, .info-panel__moves {
+  padding-left: 3px;
 }

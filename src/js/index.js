@@ -10,10 +10,11 @@ const size = 9;
 let appState = new Appstate(size);
 appState.calculateOrders();
 
-renderInfoPanel();
 renderGameField(size);
-renderControlPanel();
 
 let cells = new Cells(appState);
 cells.render();
 cells.addListener();
+
+renderInfoPanel();
+renderControlPanel();
