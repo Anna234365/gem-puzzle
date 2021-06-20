@@ -24,6 +24,7 @@ export default class AppState {
 
   calculateInitOrder() {
     this.initOrder = _shuffle(this.correctOrder);
+    this.initOrder.toString() == this.correctOrder.toString() ? this.calculateInitOrder() : false;
   }
 
   updateCurrentOrder(currentOrder) {
