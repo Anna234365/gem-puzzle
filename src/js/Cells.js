@@ -25,13 +25,14 @@ export default class Cells {
   addListener() {
     this.gameField.addEventListener('click', (event) => {
       if (event.target.classList.contains('game-field__cell')) {
-        this.shift(event.target);
+        const clickedCellNumber = parseInt(event.target.getAttribute('cell-number'));
+        const closestCells = this.calculateClosestCells(clickedCellNumber);
+        this.shift(clickedCellNumber, closestCells);
       }
     })
   }
 
-  shift(clickedCell) {
-    const clickedCellNumber = parseInt(clickedCell.getAttribute('cell-number'));
+  calculateClosestCells(clickedCellNumber) {
     let upperCellNumber;
     let bottomCellNumber;
     let leftCellNumber;
@@ -69,13 +70,18 @@ export default class Cells {
       leftCellNumber = clickedCellNumber - 1;
       rightCellNumber = clickedCellNumber + 1;
     }
-    [upperCellNumber, bottomCellNumber, leftCellNumber, rightCellNumber].forEach(elem => {
 
+    return [upperCellNumber, bottomCellNumber, leftCellNumber, rightCellNumber];
+  }
+
+  shift(clickedCellNumber, closestCells) {
+    closestCells.forEach(elem => {
       if (this.currentOrder[elem - 1] === 0) {
-        this.currentOrder[elem - 1] = this.currentOrder[clickedCellNumber - 1];
+        const emptyCellNumber = elem;
+        this.currentOrder[emptyCellNumber - 1] = this.currentOrder[clickedCellNumber - 1];
         this.currentOrder[clickedCellNumber - 1] = 0;
+        this.render();
       }
     })
-    this.render();
   }
 }
