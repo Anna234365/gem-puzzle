@@ -1,6 +1,5 @@
 const _shuffle = require('lodash/shuffle');
-const moment = require('moment');
-
+const dayjs = require('dayjs');
 export default class AppState {
   constructor(size) {
     this.size = size;
@@ -34,9 +33,9 @@ export default class AppState {
     setInterval(() => {
       this.time.setSeconds(this.time.getSeconds() + 1);
       if(this.time.getHours() > 0) {
-        this.timerString = moment(this.time).format('hh:mm:ss');
+        this.timerString = dayjs(this.time).format('hh:mm:ss');
       } else {
-        this.timerString = moment(this.time).format('00:mm:ss');
+        this.timerString = dayjs(this.time).format('00:mm:ss');
       }
     }, 1000)
   }

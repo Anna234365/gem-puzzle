@@ -1,40 +1,66 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+let mode = "development";
+let target = "web";
+
+if (process.env.NODE_ENV === "production") {
+  mode = "production";
+  target = "browserslist";
+};
 
 module.exports = {
-  devtool: 'eval-source-map',
+  mode: mode,
+  target: target,
+
   entry: {
     app: './src/js/index.js'
   },
+
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    assetModuleFilename: '[name][ext]'
+    path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: "images/[hash][ext]",
   },
+
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|jpeg|svg|ico)$/i,
-        type: 'asset/resource'
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        type: "asset/resource"
       },
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /.\js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-    ]
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { publicPath: "" },
+          },
+          "css-loader",
+          "postcss-loader",
+          "sass-loader"]
+      }
+    ],
   },
+
   plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      title: "GEM PUZZLE",
+      // template: "./src/index.html",
       favicon: "./src/assets/favicon.ico"
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
+    })
   ],
-};
+  devtool: "source-map",
+  devServer: {
+    contentBase: "./dist",
+    hot: true
+  }
+}

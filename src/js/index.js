@@ -6,7 +6,6 @@ import Cells from '../blocks/cells/Cells';
 import InfoPanel from '../blocks/info-panel/InfoPanel';
 import ControlPanel from '../blocks/control-panel/ControlPanel';
 
-
 const size = 9;
 
 let appState = new AppState(size);
