@@ -1,8 +1,7 @@
 import '../style/style.scss';
 import 'bootstrap/js/dist/dropdown';
 import AppState from './appState';
-// import renderGameField from '../blocks/game-field/gameField';
-import Cells from '../blocks/cells/Cells';
+import GameField from '../blocks/gameField/GameField';
 import InfoPanel from '../blocks/info-panel/InfoPanel';
 import ControlPanel from '../blocks/control-panel/ControlPanel';
 
@@ -17,11 +16,9 @@ infoPanel.renderInfoPanel();
 infoPanel.renderMovesCounter();
 infoPanel.renderTimer();
 
-// renderGameField(size);
+let gameField = new GameField(appState, infoPanel);
+gameField.renderGameField();
+gameField.addListener();
 
-let cells = new Cells(appState, infoPanel);
-cells.renderGameField();
-cells.addListener();
-
-let controlPanel = new ControlPanel(cells, appState);
+let controlPanel = new ControlPanel(gameField, appState);
 controlPanel.renderCotrolPanel();

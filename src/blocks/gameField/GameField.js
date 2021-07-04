@@ -1,8 +1,7 @@
-export default class Cells {
+export default class GameField {
   constructor(appState, infoPanel) {
     this.appState = appState;
     this.infoPanel = infoPanel;
-
     this.gameField = document.querySelector('.game-field');
   }
 

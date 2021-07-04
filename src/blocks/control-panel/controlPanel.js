@@ -1,8 +1,7 @@
 export default class ControlPanel {
-  constructor(cells, appState) {
-    this.cells = cells;
+  constructor(gameField, appState) {
+    this.gameField = gameField;
     this.appState = appState;
-
   }
 
 
@@ -36,7 +35,7 @@ export default class ControlPanel {
       if (event.target.classList.contains('dropdown-item')) {
         const size = parseInt(event.target.innerText.slice(2))**2;
         this.appState.setAppState(size);
-        this.cells.renderCells();
+        this.gameField.renderCells();
       }
     })
   }
