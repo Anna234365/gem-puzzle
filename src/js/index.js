@@ -20,5 +20,5 @@ let gameField = new GameField(appState, infoPanel);
 gameField.renderGameField();
 gameField.addListener();
 
-let controlPanel = new ControlPanel(gameField, appState);
+let controlPanel = new ControlPanel(gameField, appState, infoPanel);
 controlPanel.renderCotrolPanel();

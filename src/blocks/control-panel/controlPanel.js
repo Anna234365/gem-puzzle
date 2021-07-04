@@ -1,7 +1,10 @@
+import { times } from "lodash";
+
 export default class ControlPanel {
-  constructor(gameField, appState) {
+  constructor(gameField, appState, infoPanel) {
     this.gameField = gameField;
     this.appState = appState;
+    this.infoPanel = infoPanel;
   }
 
 
@@ -36,6 +39,8 @@ export default class ControlPanel {
         const size = parseInt(event.target.innerText.slice(2))**2;
         this.appState.setAppState(size);
         this.gameField.renderCells();
+        this.infoPanel.renderMovesCounter();
+        this.infoPanel.renderTimer();
       }
     })
   }

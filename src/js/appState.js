@@ -14,6 +14,9 @@ export default class AppState {
   setAppState(size) {
     this.size = size;
     this.rowLength = Math.sqrt(this.size);
+    this.time = new Date(2021, 0, 0, 0, 0, 0, 0);
+    this.moves = 0;
+    this.timerString = '00:00:00';
     this.calculateCorrectOrder();
     this.calculateInitOrder();
     this.currentOrder = this.initOrder;
