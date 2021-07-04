@@ -2,26 +2,34 @@ export default class Cells {
   constructor(appState, infoPanel) {
     this.appState = appState;
     this.infoPanel = infoPanel;
-    this.size = this.appState.currentOrder.length;
-    this.currentOrder = this.appState.currentOrder;
-    this.rowLength = Math.sqrt(this.size);
+
     this.gameField = document.querySelector('.game-field');
   }
 
-  render() {
+  renderGameField() {
+    const gameField = document.createElement('div');
+    gameField.classList.add('game-field', `game-field_size_${this.appState.size}`);
+    document.body.appendChild(gameField);
+    this.gameField = document.querySelector('.game-field');
+    this.renderCells();
+  }
+
+  renderCells() {
+    this.gameField.innerHTML = '';
     let htmlString = '';
-    for (let i = 0; i < this.size; i++) {
+    for (let i = 0; i < this.appState.size; i++) {
       let classList = "";
-      if (this.currentOrder[i] === 0) {
-        classList = 'class ="game-field__cell game-field__cell_number_0';
+      if (this.appState.currentOrder[i] === 0) {
+        classList = 'class="game-field__cell game-field__cell_empty"';
       } else {
-        classList = `class ="game-field__cell"`;
+        classList = `class="game-field__cell"`;
       }
       const attributeCellNumber = `cell-number="${i + 1}"`;
-      htmlString += `<div ${classList} ${attributeCellNumber}>${this.currentOrder[i]}</div>`;
-    }
 
+      htmlString += `<div ${classList} ${attributeCellNumber}>${this.appState.currentOrder[i]}</div>`;
+    }
     this.gameField.innerHTML = htmlString;
+    this.gameField.classList = `game-field game-field_size_${this.appState.size}`;
   }
 
   addListener() {
@@ -29,7 +37,7 @@ export default class Cells {
       if (event.target.classList.contains('game-field__cell')) {
         const clickedCellNumber = parseInt(event.target.getAttribute('cell-number'));
         const closestCells = this.calculateClosestCells(clickedCellNumber);
-        this.shift(clickedCellNumber, closestCells);
+        this.shiftCell(clickedCellNumber, closestCells);
       }
     })
   }
@@ -40,52 +48,61 @@ export default class Cells {
     let leftCellNumber;
     let rightCellNumber;
 
-    if (clickedCellNumber % this.rowLength == 0) {
-      if (clickedCellNumber == this.rowLength) {
+    if (clickedCellNumber % this.appState.rowLength == 0) {
+      if (clickedCellNumber == this.appState.rowLength) {
         upperCellNumber = 'none';
-        bottomCellNumber = clickedCellNumber + this.rowLength;
-      } else if (clickedCellNumber == this.rowLength**2) {
-        upperCellNumber = clickedCellNumber - this.rowLength;
+        bottomCellNumber = clickedCellNumber + this.appState.rowLength;
+      } else if (clickedCellNumber == this.appState.rowLength**2) {
+        upperCellNumber = clickedCellNumber - this.appState.rowLength;
         bottomCellNumber = 'none';
       } else {
-        upperCellNumber = clickedCellNumber - this.rowLength;
-        bottomCellNumber = clickedCellNumber + this.rowLength;
+        upperCellNumber = clickedCellNumber - this.appState.rowLength;
+        bottomCellNumber = clickedCellNumber + this.appState.rowLength;
       }
       leftCellNumber = clickedCellNumber - 1;
       rightCellNumber = 'none';
-    } else if (clickedCellNumber % this.rowLength == 1) {
+    } else if (clickedCellNumber % this.appState.rowLength == 1) {
       if (clickedCellNumber == 1) {
         upperCellNumber = 'none';
-        bottomCellNumber = clickedCellNumber + this.rowLength;
-      } else if (clickedCellNumber == this.size - this.rowLength + 1) {
-        upperCellNumber = clickedCellNumber - this.rowLength;
+        bottomCellNumber = clickedCellNumber + this.appState.rowLength;
+      } else if (clickedCellNumber == this.appState.size - this.appState.rowLength + 1) {
+        upperCellNumber = clickedCellNumber - this.appState.rowLength;
         bottomCellNumber = 'none';
       } else {
-        upperCellNumber = clickedCellNumber - this.rowLength;
-        bottomCellNumber = clickedCellNumber + this.rowLength;
+        upperCellNumber = clickedCellNumber - this.appState.rowLength;
+        bottomCellNumber = clickedCellNumber + this.appState.rowLength;
       }
       leftCellNumber = 'none';
       rightCellNumber = clickedCellNumber + 1;
+    } else if (clickedCellNumber < this.appState.rowLength) {
+      upperCellNumber = 'none';
+      bottomCellNumber = clickedCellNumber + this.appState.rowLength;
+      leftCellNumber = clickedCellNumber - 1;
+      rightCellNumber = clickedCellNumber + 1;
+    } else if (clickedCellNumber > this.appState.rowLength * ( this.appState.rowLength - 1) ) {
+      upperCellNumber = clickedCellNumber - this.appState.rowLength;
+      bottomCellNumber = 'none';
+      leftCellNumber = clickedCellNumber - 1;
+      rightCellNumber = clickedCellNumber + 1;
     } else {
-      upperCellNumber = clickedCellNumber - this.rowLength;
-      bottomCellNumber = clickedCellNumber + this.rowLength;
+      upperCellNumber = clickedCellNumber - this.appState.rowLength;
+      bottomCellNumber = clickedCellNumber + this.appState.rowLength;
       leftCellNumber = clickedCellNumber - 1;
       rightCellNumber = clickedCellNumber + 1;
     }
-
     return [upperCellNumber, bottomCellNumber, leftCellNumber, rightCellNumber];
   }
 
-  shift(clickedCellNumber, closestCells) {
+  shiftCell(clickedCellNumber, closestCells) {
     closestCells.forEach(elem => {
-      if (this.currentOrder[elem - 1] === 0) {
+      if (this.appState.currentOrder[elem - 1] === 0) {
         const emptyCellNumber = elem;
-        this.currentOrder[emptyCellNumber - 1] = this.currentOrder[clickedCellNumber - 1];
-        this.currentOrder[clickedCellNumber - 1] = 0;
-        this.render();
-        this.appState.updateCurrentOrder(this.currentOrder);
+        this.appState.currentOrder[emptyCellNumber - 1] = this.appState.currentOrder[clickedCellNumber - 1];
+        this.appState.currentOrder[clickedCellNumber - 1] = 0;
+        this.renderCells();
         this.appState.updateMovesCounter();
         this.infoPanel.renderMovesCounter();
+        this.appState.checkCurrentOrder();
       }
     })
   }

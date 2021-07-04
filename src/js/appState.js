@@ -1,8 +1,8 @@
 const _shuffle = require('lodash/shuffle');
 const dayjs = require('dayjs');
 export default class AppState {
-  constructor(size) {
-    this.size = size;
+  constructor() {
+    this.size = 0;
     this.initOrder = [];
     this.currentOrder = [];
     this.correctOrder = [];
@@ -11,13 +11,16 @@ export default class AppState {
     this.timerString = '00:00:00';
   }
 
-  calculateOrders() {
+  setAppState(size) {
+    this.size = size;
+    this.rowLength = Math.sqrt(this.size);
     this.calculateCorrectOrder();
     this.calculateInitOrder();
     this.currentOrder = this.initOrder;
   }
 
   calculateCorrectOrder() {
+    this.correctOrder = [];
     for (let i = 1; i < this.size; i++) {
       this.correctOrder.push(i);
     }
@@ -38,11 +41,6 @@ export default class AppState {
         this.timerString = dayjs(this.time).format('00:mm:ss');
       }
     }, 1000)
-  }
-
-  updateCurrentOrder(currentOrder) {
-    this.currentOrder = currentOrder;
-    this.checkCurrentOrder();
   }
 
   checkCurrentOrder() {

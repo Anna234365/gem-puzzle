@@ -1,8 +1,10 @@
 export default class ControlPanel {
-  constructor() {
-
+  constructor(cells, appState) {
+    this.cells = cells;
+    this.appState = appState;
 
   }
+
 
   renderCotrolPanel() {
     document.body.insertAdjacentHTML('beforeend',
@@ -24,5 +26,18 @@ export default class ControlPanel {
       <button type="button" class="btn control-panel__button">Resume</button>
       <button type="button" class="btn control-panel__button">Score</button>
     </div>`);
+
+    this.addListeners();
+  }
+
+  addListeners() {
+    const dropDownFieldSize = document.querySelector('.dropdown-menu');
+    dropDownFieldSize.addEventListener('click', (event) => {
+      if (event.target.classList.contains('dropdown-item')) {
+        const size = parseInt(event.target.innerText.slice(2))**2;
+        this.appState.setAppState(size);
+        this.cells.renderCells();
+      }
+    })
   }
 }
